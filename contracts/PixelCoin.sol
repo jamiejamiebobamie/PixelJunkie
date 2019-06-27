@@ -7,7 +7,7 @@ import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Mintable.sol';
 
 contract PixelCoin is ERC721Full, ERC721Mintable {
 
-    event NewZombie(uint zombieId, string name, uint dna);
+    event NewPixelRevealed(string _xy, string _picture, string _hexCode, address _owner);
 
     address public owner;
     uint public last_completed_migration;
@@ -15,8 +15,8 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
     uint sizeOfPicture = 600;
 
     struct Pixel {
-        uint8[2] xy; // the [x,y] coordinate of the pixel, acts as the pixel's _id
-        uint8 picture; // which picture the pixel is part of (each picture is given a number starting at 0).
+        uint16[2] xy; // the [x,y] coordinate of the pixel, acts as the pixel's _id
+        string picture; // which picture the pixel is part of (each picture is given a number starting at 0).
         string hexCode; // the corresponding hex code of the pixel.
         address _owner; // the owner of the pixel
 
@@ -53,19 +53,21 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
   function buy(address _buyer) {
 
   }
+
 //generate random pixel to buy from unowned pixels
-  function _generateRandomDna(string _str) private view returns (uint) {
+  function _generateRandomPixel(string _str) private view returns (uint) {
     uint rand = uint(keccak256(abi.encodePacked(_str)));
     // dnaModulus
     return rand % sizeOfPicture;
     }
 
 // called with the buy function above.
-    function createPixel(string _name) public {
+    function createPixel(string _xy, string _picture, string _hexCode) private {
         /* require(ownerZombieCount[msg.sender] == 0); */
-        uint randDna = _generateRandomDna(_name);
-        randDna = randDna - randDna % 100;
-        _createZombie(_name, randDna);
+        address _owner = msg.sender
+        uint id = pixels.push(Pixel(_xy, _picture, _hexCode, _owner)) - 1;
+        uint id = zombies.push(Zombie(_name, _dna)) - 1;
+        emit NewPixelRevealed(_xy, _picture, _hexCode, _owner);
     }
 
 // return all pixels of an owner (can be called by others)

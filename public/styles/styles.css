@@ -1,5 +1,27 @@
+.container{
+ /* !!!! */
+ /* COPIED DIRECTLY FROM:: https://codepen.io/subz/pen/GgPrJP */
+ /* !!!! */
+ position: absolute;
+ z-index: 1;
+ background: gray url(https://subtlepatterns.com/patterns/geometry2.png) repeat 0 0;
+ width: 100%;
+ height: 200%;
+ box-sizing: border-box;
+ -webkit-animation: slide 20s linear infinite;
+}
+
+@-webkit-keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -400px 0; }
+}
+
 nav{
     padding-right: 25px;
+}
+
+.navbar{
+    margin-bottom: -5px;
 }
 
 .portfolio_container, .transactions_container{
@@ -47,12 +69,7 @@ nav{
     margin: 30px;
 }
 
-
-/* .transaction_data{
-    width: 30px
-} */
-
-h1, h2, h3, title{
+h1, h2, h3, h4, title{
     font-style: normal;
     font-family: monospace;
 }
@@ -68,12 +85,23 @@ h2{
     font-size: 30px;
     padding: -10px;
     padding-bottom: 25px;
+    margin-top: -15px;
 
 }
 
 h3{
     font-size: 20px;
+    margin-top: -15px;
     padding: -10px;
+
+}
+
+h4{
+    padding-top: 50px;
+    font-size: 30px;
+    line-height: 2em;
+    letter-spacing: normal;
+    padding: 75px;
 
 }
 
@@ -115,20 +143,18 @@ button{
     padding: 5vw;
 }
 
-
 #picture{
     width:40vw;
     height:40vw;
     padding: 4vw;
     object-fit: contain;
+    opacity: .3;
 }
 
 #picture:hover{
-    background-color: blue;
+    opacity: 1;
 }
 
 li:hover{
-    /* font-color: white; */
-    background-color: #B2DFEE;
-    opacity: .9;
+    background-color: #A9A9A9;
 }
