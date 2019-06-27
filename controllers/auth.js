@@ -3,24 +3,11 @@ const User = require("../models/user");
 const Picture = require("../models/picture");
 const Pixel = require("../models/pixel");
 
-
-
-
 module.exports = app => {
 
     // INDEX :: SIGNED-IN, PORTFOLIO PAGE
     app.get('/', (req,res) => {
-        request = require('request');
         var currentUser = req.user;
-        let money;
-        let activated = false;
-        let stocks;
-        let currentWorth = 0;
-        let portfolioWorth = 0;
-        let current_info;
-        let currentSum = 0;
-
-
         if (currentUser) {
              res.render('landing', {currentUser});
         } else {

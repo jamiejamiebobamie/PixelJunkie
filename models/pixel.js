@@ -4,17 +4,13 @@ const Populate = require("../utils/autopopulate");
 var uniqueValidator = require('mongoose-unique-validator');
 
 
-const StockSchema = new Schema({
-  symbol: { type: String },
-  priceAtPurchase: { type: Number },
-  news: { type: String },
-  quantity : { type: Number },
-  action: { type: String },
-  owner: { type: Schema.Types.ObjectId, ref: "User" },
-  color: {type: String },
-  priceAtStartOfDay: { type: Number },
-  priceNow: {type: Number },
-  value: {type: Number }
+const PixelSchema = new Schema({
+    coordinateX: { type: Number }, // coordinate in picture :: width or x value
+    coordinateY: { type: Number }, // coordinate in picture :: height or y value
+    hexCode: { type: String }, // the color or hex code of the pixel
+    percentRevealed : { type: Number }, // percent of pixels of the picture owned/revealed
+    picture: { type: Schema.Types.ObjectId, ref: "Pixel" }, // array of references to the Pixel objects contained by the picture
+    owner: { type: Schema.Types.ObjectId, ref: "User" }, // array of references to the User objects that own pixel(s)
 });
 
 // // Always populate the author field
@@ -22,4 +18,4 @@ const StockSchema = new Schema({
 //     .pre('findOne', Populate('quote'))
 //     .pre('find', Populate('quote'))
 
-module.exports = mongoose.model("Stock", StockSchema);
+module.exports = mongoose.model("Pixel", PixelSchema);

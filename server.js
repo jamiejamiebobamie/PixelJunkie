@@ -13,7 +13,7 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 
 // Set db
-const db = require('./data/database');
+const db = require('./data/pixelJunkie');
 
 //middleware for JSON data
 const bodyParser = require('body-parser');
@@ -49,7 +49,7 @@ const stocks = require('./controllers/pixels.js')(app);
 const port = process.env.PORT || 13000;
 
 // Add after body parser initialization!
-app.use(expressValidator());
+// app.use(expressValidator());
 
 //must come below const app, but before routes
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -63,7 +63,7 @@ app.use(express.static('public'));
 // mongoose.connect((process.env.MONGODB_URI || 'mongodb://localhost/database'), { useNewUrlParser: true });
 
 // local host database
-mongoose.connect('mongodb://localhost/database');
+// mongoose.connect('mongodb://localhost/pixelJunkie');
 
 //views middleware
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));

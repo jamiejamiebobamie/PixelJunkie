@@ -11,7 +11,9 @@ module.exports = (app) => {
             if (currentUser) {
             User.findOne({_id: req.user})
                 .then(user => {
-                    pixels = user.pixels;
+                    if (user){
+                        pixels = user.pixels;
+                    }
                 res.render('myPixels', {currentUser, pixels});
             });
             } else {

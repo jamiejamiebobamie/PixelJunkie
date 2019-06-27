@@ -7,12 +7,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 const UserSchema = new Schema({
   password: { type: String, select: false },
   username: { type: String, required: true, unique: true },
-  stocks : [{ type: Schema.Types.ObjectId, ref: "Stock" }],
-  transactions : { type : Array , "default" : [] },
-  money : { type: Number },
-  portfolioWorth: { type: Number },
-  email: { type: String, required: true, unique: true },
-  activated: { type: Boolean }
+  pixels : [{ type: Schema.Types.ObjectId, ref: "Pixel" }],
+  pictures : [{ type: Schema.Types.ObjectId, ref: "Picture" }],
 });
 
 

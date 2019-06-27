@@ -1,21 +1,20 @@
 <div class='transactions_container'>
-    <h1>Transactions</h1>
+    <h1>Pixel Junkie</h1>
+    <h2>My Pixels</h2>
     <!-- <div class="transactions"> -->
         <ol class="transaction_list">
+            <div class="transaction_item"style="background-color: red;" title="Picture: City&#13;Coordinate: (1,1)&#13;Hex Code: FF0000"></div>
+            <div class="transaction_item"style="background-color: blue;"></div>
+            <div class="transaction_item"style="background-color: pink;"></div>
+            <div class="transaction_item"style="background-color: blue;"></div>
+            <div class="transaction_item"style="background-color: pink;"></div>
+            <div class="transaction_item"style="background-color: blue;"></div>
+            <div class="transaction_item"style="background-color: orange;"></div>
+            <div class="transaction_item"style="background-color: blue;"></div>
             {{#each pixels}}
-
-            <!-- uint8[2] xy; // the [x,y] coordinate of the pixel, acts as the pixel's _id
-            string picture; // which picture the pixel is part of.
-            string hexCode; // the corresponding hex code of the pixel.
-            address _owner; // the owner of the pixel
-
-            /* Hexadecimal literals are prefixed with the keyword hex and are enclosed
-            in double or single-quotes (hex"001122FF"). Their content must be a hexadecimal
-            string and their value will be the binary representation of those values.
-            Hexadecimal literals behave like string literals and have the same convertibility restrictions. */ -->
                 <div class="transaction_item">
                     <!-- <table bgcolor={{this.hexCode}}></table> -->
-                    <table bgcolor=red></table>
+                    <table bgcolor={{this.hexCode}}></table>
 
                     <h3>{{this.hexCode}}</h3>
                     <h3>{{this.picture}}</h3>

@@ -1,8 +1,6 @@
-table{
-    width: 3vw;
-    height: 3vw;
+nav{
+    padding-right: 25px;
 }
-
 
 .portfolio_container, .transactions_container{
         display: flex;
@@ -13,7 +11,6 @@ table{
 .portfolio_interaction {
     display: flex;
     justify-content: center;
-    margin-right: 10%;
     flex-wrap: wrap;
     margin-top: 40px;
 }
@@ -29,15 +26,6 @@ table{
     padding-right: 60px;
 }
 
-.transaction_list{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-right: 30%;
-    margin-top: 30px;
-
-}
-
 .stock_item{
     display: flex;
     justify-content: space-between;
@@ -47,30 +35,45 @@ table{
     padding-bottom: 10px;
 }
 
-.buy{
-    padding-left: 30px;
-}
-
-h3{
-    font-size: 20px;
+.transaction_list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .transaction_item{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: solid;
-    border-width: 1px;
-    padding-bottom: 10px;
+    width: 150px;
+    height: 150px;
+    margin: 30px;
 }
+
 
 /* .transaction_data{
     width: 30px
 } */
 
+h1, h2, h3, title{
+    font-style: normal;
+    font-family: serif;
+}
+
+h1{
+    font-size: 40px;
+    padding: -10px;
+    padding-bottom: 50px;
+    padding-top: 30px;
+}
+
 h2{
-    text-align: center;
-    margin: 20px;
-    margin-bottom: 30px;
+    font-size: 30px;
+    padding: -10px;
+
+}
+
+h3{
+    font-size: 20px;
+    padding: -10px;
+
 }
 
 .list-group-item{
@@ -109,4 +112,16 @@ button{
     border-color: black;
     border-width: 1px;
     padding: 5vw;
+}
+
+
+#picture{
+    width:40vw;
+    height:40vw;
+    padding: 4vw;
+    object-fit: contain;
+}
+
+#picture:hover{
+    background-color: blue;
 }

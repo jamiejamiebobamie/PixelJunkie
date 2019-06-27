@@ -1,23 +1,14 @@
-{{#if activated}}
 <div class='portfolio_container'>
-    <h1>Portfolio (${{currentWorth}})</h1>
+    <h1>Pixel Junkie</h1>
+    <h2>Click on a picture to purchase a pixel.</h2>
+    <h3>You can only buy up to 3 pixels a day.</h2>
     <div class="portfolio_interaction">
-        <div class="portfolio_stocks">
-            <ol class="stock_list">
-                {{#each stocks}}
-                    <div class="stock_item">
-                        <font color="{{this.color}}">
-                        <h3>{{this.symbol}}</h3>
-                        </font>
-                        <h3> - {{this.quantity}} Shares</h3>
-                        <font color="{{this.color}}">
-                        <h3>${{this.value}}</h3>
-                        </font>
-                    </div>
-                {{/each}}
-            </ol>
+        <!-- <div class="portfolio_stocks"> -->
+            <img id="picture" src="/pictures/abstract.jpg" alt="" title="Picture: 'City'&#13;Percent Revealed: 30%">
+            <img id="picture" src="/pictures/city.jpg" alt="">
+            <img id="picture" src="/pictures/nicolas_cage.jpg" alt="">
         </div>
-        <div class="buy">
+        <!-- <div class="buy">
             <h2>Cash - ${{money}}</h2>
             <form class="buy" action="/buy" method="post">
               <div class="form-group">
@@ -28,9 +19,6 @@
               </div>
               <button type="submit" class="btn btn-primary">Buy</button>
             </form>
-        </div>
-    </div>
+        </div> -->
+    <!-- </div> -->
 </div>
-{{else}}
-<h2>Please check your email for an acitvation link.</h2>
-{{/if}}
