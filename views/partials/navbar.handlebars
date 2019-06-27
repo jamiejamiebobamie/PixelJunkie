@@ -1,20 +1,16 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="/">pixel junkie
       </a>
     </div>
     <div>
-        <ul class="nav navbar-nav navbar-left">
-          {{#if currentUser}}
-            <li><a href="/sign-out">sign out</a></li>
-          {{/if}}
-        </ul>
         <ul class="nav navbar-nav navbar-right">
           {{#if currentUser}}
             <li><a href="/">buy pixels</a></li>
             <li><a href="/myPixels">my pixels</a></li>
             <li><a href="/about">about</a></li>
+            <li><a href="/sign-out">sign out</a></li>
           {{else}}
             <li><a href="/sign-in">sign in</a></li>
             <li><a href="/register">register</a></li>
