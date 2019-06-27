@@ -1,0 +1,36 @@
+{{#if activated}}
+<div class='portfolio_container'>
+    <h1>Portfolio (${{currentWorth}})</h1>
+    <div class="portfolio_interaction">
+        <div class="portfolio_stocks">
+            <ol class="stock_list">
+                {{#each stocks}}
+                    <div class="stock_item">
+                        <font color="{{this.color}}">
+                        <h3>{{this.symbol}}</h3>
+                        </font>
+                        <h3> - {{this.quantity}} Shares</h3>
+                        <font color="{{this.color}}">
+                        <h3>${{this.value}}</h3>
+                        </font>
+                    </div>
+                {{/each}}
+            </ol>
+        </div>
+        <div class="buy">
+            <h2>Cash - ${{money}}</h2>
+            <form class="buy" action="/buy" method="post">
+              <div class="form-group">
+                <input type="ticker" name="ticker" class="form-control" id="ticker" placeholder="Ticker">
+              </div>
+              <div class="form-group">
+                <input type="qty" name="qty" class="form-control" id="qty" placeholder="Qty">
+              </div>
+              <button type="submit" class="btn btn-primary">Buy</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{else}}
+<h2>Please check your email for an acitvation link.</h2>
+{{/if}}
