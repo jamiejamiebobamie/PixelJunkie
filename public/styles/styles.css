@@ -54,7 +54,7 @@ nav{
 
 h1, h2, h3, title{
     font-style: normal;
-    font-family: serif;
+    font-family: monospace;
 }
 
 h1{
@@ -67,6 +67,7 @@ h1{
 h2{
     font-size: 30px;
     padding: -10px;
+    padding-bottom: 25px;
 
 }
 
@@ -124,4 +125,10 @@ button{
 
 #picture:hover{
     background-color: blue;
+}
+
+li:hover{
+    /* font-color: white; */
+    background-color: #B2DFEE;
+    opacity: .9;
 }
