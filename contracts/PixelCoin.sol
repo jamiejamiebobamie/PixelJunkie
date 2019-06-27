@@ -25,37 +25,45 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
     upgraded.setCompleted(last_completed_migration);
   }
 
+
+
+
+
+
   event NewPixelRevealed(uint16[2] _xy, string _picture, string _hexCode);
+
   uint sizeOfPicture = 600;
+
   struct Pixel {
       uint16[2] xy; // the [x,y] coordinate of the pixel, acts as the pixel's _id
       string picture; // which picture the pixel is part of.
   }
 
-// Pixel array called pixels
+      // Pixel array called pixels
       Pixel[] public pixels;
 
       mapping (uint => address) public pixelToOwner;
-
       mapping (address => uint) ownerPixelCount;
 
       // key: an address
       // value: [pixelsBoughtOnADay, aDay'sDate]
       mapping (address => uint[]) ownertoPixelsBoughtAndBoughtDay;
 
+
+    //NOT WRITTEN-----
     //generate random pixel to buy from unowned pixels
-    //NOT WRITTEN
       function _generateRandomPixel(string _str) private view returns (uint) {
         uint rand = uint(keccak256(abi.encodePacked(_str)));
         // dnaModulus
         return rand % sizeOfPicture;
         }
+    //NOT WRITTEN-----
+
 
     function createPixel(uint16[2] _xy, string _picture) internal {
-        address _owner = msg.sender
         uint id = pixels.push(Pixel(_xy, _picture)) - 1;
         pixelToOwner[id] = msg.sender;
-        ownerPixelCount[msg.sender]++;
+        ownerPixelCount[msg.sender]++; //SAFE MATH!!!
         emit NewPixelRevealed(_xy, _picture);
     }
 
@@ -70,7 +78,7 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
           // if it hasn't been one day since the last purchase
           if (ownerPixelsBoughtPerDay[msg.sender][1] + 1 days < now)){
               //increment the amount of pixels bought for that day
-              ownerPixelsBoughtPerDay[msg.sender][0]++; //NEED TO UPDATE EVERYTHING WITH THE SAFE MATH FUNCTIONS!!!
+              ownerPixelsBoughtPerDay[msg.sender][0]++; //SAFE MATH!!!
           } else {
               //else set the time to the new day
               ownerPixelsBoughtPerDay[msg.sender][1] = now;
@@ -80,9 +88,15 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
 
       }
 
-// return all pixels of an owner (can be called by others)
-    function showPixels(address _owner) public view returns (pixels){
-
+// return all pixels owned by the caller of the function
+    function showPixels() public view returns (pixels){
+         Pixel[] public ownersPixels;
+         for (uint i = 0; i < pixels.length(); i++){
+             if (pixels[i] == msg.sender){
+                 ownersPixels.push(pixels[i])
+             }
+         }
+         return ownersPixels
     }
 
 // STRETCH CHALLENGE: offerToBuy function:: offer to buy the pixels from the owner
