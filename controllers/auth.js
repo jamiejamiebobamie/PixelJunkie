@@ -81,4 +81,14 @@ module.exports = app => {
               return res.status(400).send({ err: err });
             });
     });
+
+    // ABOUT PAGE GET ROUTE
+    app.get('/about', (req, res) => {
+        var currentUser = req.user;
+        if (currentUser) {
+            res.render('about', {currentUser});
+        } else {
+            res.render('about')
+        }
+    });
 };
