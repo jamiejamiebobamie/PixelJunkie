@@ -9,22 +9,24 @@
      width: 100%;
      height: 200%;
      box-sizing: border-box;
-     -webkit-animation: slide 20s linear infinite;
+     -webkit-animation: slide 50s linear infinite;
     }
 
     @-webkit-keyframes slide {
         from { background-position: 0 0; }
-        to { background-position: 400px 0; }
+        to { background-position: 400px 400px; }
     }
 /* !!!! */
 
 
 nav{
     padding-right: 25px;
+
 }
 
 .navbar{
     margin-bottom: -5px;
+    /* height: 75px; */
 }
 
 .portfolio_container, .transactions_container{
@@ -71,7 +73,7 @@ nav{
 .transaction_list{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
 }
 
 .transaction_item{
@@ -80,7 +82,7 @@ nav{
     margin: 30px;
 }
 
-h1, h2, h3, h4, title{
+h1, h2, h3, h4, h5, title{
     font-style: normal;
     font-family: monospace;
 }
@@ -115,7 +117,12 @@ h4{
     line-height: 2em;
     letter-spacing: normal;
     /* padding: 75px; */
+}
 
+h5{
+    font-size: 40px;
+    padding: -10px;
+    padding-bottom: 50px;
 }
 
 .list-group-item{
