@@ -4,29 +4,39 @@ pragma solidity ^0.5.0;
 
 import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Full.sol';
 import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Mintable.sol';
+import './safemath.sol';
 
 contract PixelCoin is ERC721Full, ERC721Mintable {
 
-/* these functions were found from Dani's RainbowCoin tutorial */
-  address public owner;
-  uint public last_completed_migration;
-  constructor() ERC721Full("PixelCoin", "PixelCoin") public {
-        owner = msg.sender;
-  }
-  modifier restricted() {
-    if (msg.sender == owner) _;
-  }
+    /* these functions were found from Dani's RainbowCoin tutorial */
+      address public owner;
+      uint public last_completed_migration;
+      constructor() ERC721Full("PixelCoin", "PixelCoin") public {
+            owner = msg.sender;
+      }
+      modifier restricted() {
+        if (msg.sender == owner) _;
+      }
 
-  function setCompleted(uint completed) public restricted {
-    last_completed_migration = completed;
-  }
+      function setCompleted(uint completed) public restricted {
+        last_completed_migration = completed;
+      }
 
-  function upgrade(address new_address) public restricted {
-    Migrations upgraded = Migrations(new_address);
-    upgraded.setCompleted(last_completed_migration);
-  }
-/* ^Untested, foreign, scary. */
+      function upgrade(address new_address) public restricted {
+        Migrations upgraded = Migrations(new_address);
+        upgraded.setCompleted(last_completed_migration);
+      }
+    /* ^Untested, foreign, scary. */
 
+    // From crytozombies:
+    function withdraw() external onlyOwner {
+      address _owner = owner();
+      _owner.transfer(address(this).balance);
+    }
+
+    using SafeMath for uint256;
+
+    //  LOOK THIS UP! STILL DON'T GET IT. SOMETHING ABOUT RECORDING A LOG W/O USING STORAGE
     event NewPixelRevealed(uint16[2] _xy, string _picture, string _hexCode);
 
     uint sizeOfPicture = 600; // length and width of picture length x width.
@@ -66,16 +76,16 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
     //**//NOT WRITTEN-----
 
     function createPixel(uint16[2] _xy, string _picture) internal {
-        uint id = pixels.push(Pixel(_xy, _picture)) - 1;
+        uint id = pixels.push(Pixel(_xy, _picture)).sub(1);
         pixelToOwner[id] = msg.sender;
-        ownerPixelCount[msg.sender]++; //SAFE MATH!!!
+        ownerPixelCount[msg.sender].add(1); //SAFE MATH!!!
         emit NewPixelRevealed(_xy, _picture);
     }
 
-    function buyUnownedPixel(uint16[2] _xy, string _picture) public {
+    function buyUnownedPixel(string _picture) public payable {
         // require that the amount of pixels bought today is less than 3
         // or require that today's date is different than the date stored from the last buy.
-        require(ownerPixelsBoughtPerDay[msg.sender][0] < 3 || ownerPixelsBoughtPerDay[msg.sender][1] + 1 days < now));
+        require(ownertoBoughtCountAndBoughtDay[msg.sender][0] < 3 || ownertoBoughtCountAndBoughtDay[msg.sender][1] + 1 days < now));
 
         // require that there are still pixels left to purchase from the given picture
         require(pictureToPixels[_picture].length != 0);
@@ -101,14 +111,15 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
         ownerToPixels[msg.sender].push(createPixel(_xy, _picture));
 
         // if it hasn't been one day since the last purchase
-        if (ownerPixelsBoughtPerDay[msg.sender][1] + 1 days < now)){
+        if (ownertoBoughtCountAndBoughtDay[msg.sender][1] + 1 days < now)){
             //increment the amount of pixels bought for that day
-            ownerPixelsBoughtPerDay[msg.sender][0]++; //SAFE MATH!!!
+            ownertoBoughtCountAndBoughtDay[msg.sender][0].add(1); //SAFE MATH!!!
         } else {
             //else set the time to the new day
-            ownerPixelsBoughtPerDay[msg.sender][1] = now;
+            // might need to typecast the time by calling the 'uint32()' method.
+            ownertoBoughtCountAndBoughtDay[msg.sender][1] = now;
             //and increment the number of purchases for that day to 1
-            ownerPixelsBoughtPerDay[msg.sender][0] = 1;
+            ownertoBoughtCountAndBoughtDay[msg.sender][0] = 1;
         }
     }
 
@@ -127,7 +138,7 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
         return ownersPixels
     }
 
-    // STRETCH CHALLENGE: offerToBuy function:: offer to buy the pixels from the owner
+    // STRETCH CHALLENGE: offerToBuy function:: offer to buy the pixels from their owner
     function offerToBuyOwnedPixel(address _buyer, address _seller, uint16[2] _xy, string _picture) external {
 
     }
