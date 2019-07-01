@@ -9,7 +9,7 @@
      width: 100%;
      height: 200%;
      box-sizing: border-box;
-     /* -webkit-animation: slide 50s linear infinite; */
+     -webkit-animation: slide 50s linear infinite;
     }
 
 /* this animation makes me computer become the sun. */
