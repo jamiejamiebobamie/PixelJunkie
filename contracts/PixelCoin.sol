@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 
-//defintiely stealing this from somewhere, but the site should be called "Pixel Junkie"
+//defintiely stealing this from somewhere, but the site is called "Pixel Junkie"
 
 import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Full.sol';
 import 'openzeppelin-solidity/contracts/token/ERC721/ERC721Mintable.sol';
@@ -79,7 +79,9 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
         uint id = pixels.push(Pixel(_xy, _picture)).sub(1);
         pixelToOwner[id] = msg.sender;
         ownerPixelCount[msg.sender].add(1); //SAFE MATH!!!
-        emit NewPixelRevealed(_xy, _picture);
+    //**//NOT WRITTEN-----
+        emit NewPixelRevealed(_xy, _picture); /// NOT IMPLEMENTED!!!!
+    //**//NOT WRITTEN-----
     }
 
     function buyUnownedPixel(string _picture) public payable {
