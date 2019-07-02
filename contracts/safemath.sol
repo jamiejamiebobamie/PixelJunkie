@@ -1,6 +1,7 @@
 /* from: https://cryptozombies.io/en/lesson/5/chapter/13 */
 
-pragma solidity ^0.4.25;
+/* pragma solidity ^0.4.25; */
+pragma solidity ^0.5.0;
 
 /**
  * @title SafeMath
