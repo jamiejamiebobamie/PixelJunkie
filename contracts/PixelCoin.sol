@@ -93,7 +93,7 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
         require(ownertoBoughtCountAndBoughtDay[msg.sender][0] < 3 || ownertoBoughtCountAndBoughtDay[msg.sender][1] + 1 days < now);
 
         // require that there are still pixels left to purchase from the given picture
-        require(pictureToPixels[_picture].length != 0);
+        /* require(pictureToPixels[_picture].length != 0); */
 
     //**//NOT WRITTEN-----
         //NEED TO GENERATE A RANDOM PIXEL IN AN EFFICIENT WAY FROM THE PIXELS STILL AVAILABLE
@@ -102,20 +102,20 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
 
         uint randCoordinate; // the coordinate randomly generated
 
-        for (uint i = 0; i < pictureToPixels[_picture].length; i++) {
+        /* for (uint i = 0; i < pictureToPixels[_picture].length; i++) { */
             // find the item in the array that is equal to the random coordinate generated.
-            if (pictureToPixels[_picture][i] == randCoordinate) {
+            /* if (pictureToPixels[_picture][i] == randCoordinate) { */
                 // duplicate the last entry in the array into the index that stores the random coordinate
                 // pop the last entry.
-                pictureToPixels[_picture][i] = pictureToPixels[_picture][-i];
-                pictureToPixels[_picture].pop();
-            }
-        }
+                /* pictureToPixels[_picture][i] = pictureToPixels[_picture][-i]; */
+                /* pictureToPixels[_picture].pop(); */
+            /* } */
+        /* } */
 
         uint16[2] memory _xy = [300,300]; //for testing purposes
 
         // create a new pixel and push it to the ownerToPixel array.
-        /* ownerToPixels[msg.sender].push(createPixel(_xy, _picture)); */
+        ownerToPixels[msg.sender].push(createPixel(_xy, _picture));
 
         // if it hasn't been one day since the last purchase
         if (ownertoBoughtCountAndBoughtDay[msg.sender][1] + 1 days < now){
