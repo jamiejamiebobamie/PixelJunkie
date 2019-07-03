@@ -1,10 +1,14 @@
+    const NFT_CONTRACT_ADDRESS = process.env.NFT_CONTRACT_ADDRESS
 window.addEventListener('load', function() {
 
     var pixelJunkies;
     var userAccount;
 
+    // const FACTORY_CONTRACT_ADDRESS = process.env.FACTORY_CONTRACT_ADDRESS
+
+
       function startApp() {
-        var pixelJunkiesAddress = "YOUR_CONTRACT_ADDRESS";
+        var pixelJunkiesAddress = NFT_CONTRACT_ADDRESS;
         pixelJunkies = new web3js.eth.Contract(pixelJunkiesABI, pixelJunkiesAddress);
 
         var accountInterval = setInterval(function() {
@@ -16,28 +20,35 @@ window.addEventListener('load', function() {
             .then(displayPixels);
           }
         }, 100);
+
+        pixelJunkies.events.Transfer({ filter: { _to: userAccount } })
+    .on("data", function(event) {
+      let data = event.returnValues;
+      getOwnedPixels(userAccount)
+      .then(displayPixels);
+    }).on("error", console.error);
     }
 
     function displayPixels(ids) {
-       $("#zombies").empty();
+       $("#pixels").empty();
        for (id of ids) {
          // Look up zombie details from our contract. Returns a `zombie` object
-         getZombieDetails(id)
-         .then(function(zombie) {
+         getPixelDetails(id)
+         .then(function(pixel) {
            // Using ES6's "template literals" to inject variables into the HTML.
            // Append each one to our #zombies div
-           $("#zombies").append(`<div class="zombie">
+           $("#pixels").append(`<div class="pixel">
              <ul>
-               <li>Name: ${zombie.name}</li>
-               <li>DNA: ${zombie.dna}</li>
-               <li>Level: ${zombie.level}</li>
-               <li>Wins: ${zombie.winCount}</li>
-               <li>Losses: ${zombie.lossCount}</li>
-               <li>Ready Time: ${zombie.readyTime}</li>
+               <li>Name: ${pixel.xy}</li>
+               <li>DNA: ${pixel.picture}</li>
              </ul>
            </div>`);
          });
        }
+     }
+
+     function getPixelDetails(id) {
+         return pixelJunkies.methods.pictures(id).call()
      }
 
 // the problem is there is a displayZombies function as well as a getZombiesByOwner method,
@@ -46,8 +57,9 @@ window.addEventListener('load', function() {
         return pixelJunkies.methods.showPixels(msgSender).call()
      }
 
-     function buyUnownedPixel(pixels){
-         return pixelJunkies.methods.buyUnownedPixel().send()
+     function buyPixel(pixels){
+         console.log('test')
+         return pixelJunkies.methods.buyUnownedPixel('city').send()
      }
 
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)

@@ -14,6 +14,7 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
       uint public last_completed_migration;
       constructor() ERC721Full("PixelCoin", "PixelCoin") public {
             owner = msg.sender;
+            pictures.push('city')
       }
       modifier restricted() {
         if (msg.sender == owner) _;
@@ -81,6 +82,7 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
     function createPixel(uint16[2] memory _xy, string memory _picture) internal {
         uint id = ownerToPixels[msg.sender].push(Pixel(_xy, _picture)).sub(1);
         pictureToPixels[_picture].push(id);
+        /* ownerToPixels[msg.sender].push(_newPixel); */
         /* ownerPixelCount[msg.sender].add(1); //SAFE MATH!!! */
     //**//NOT WRITTEN-----
         emit NewPixelRevealed(_xy, _picture); /// NOT IMPLEMENTED!!!!
@@ -114,8 +116,10 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
 
         uint16[2] memory _xy = [300,300]; //for testing purposes
 
+        createPixel(_xy, _picture);
+
         // create a new pixel and push it to the ownerToPixel array.
-        ownerToPixels[msg.sender].push(createPixel(_xy, _picture));
+        /* ownerToPixels[msg.sender].push(_newPixel); */
 
         // if it hasn't been one day since the last purchase
         if (ownertoBoughtCountAndBoughtDay[msg.sender][1] + 1 days < now){

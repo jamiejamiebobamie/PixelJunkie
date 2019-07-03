@@ -14,7 +14,7 @@
 */
 
 
-const PixelCoin = artifacts.require('./PixelCoin.sol');
+const PixelCoin = artifacts.require('./contracts/PixelCoin.sol');
 const _ = '        ';
 
 

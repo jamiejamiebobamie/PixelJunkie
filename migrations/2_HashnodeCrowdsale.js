@@ -7,7 +7,7 @@ module.exports = function(deployer) {
     startTime,
     endTime,
     5,
-    "0x5AEDA56215b167893e80B4fE645BA6d5Bab767DE", // Replace this wallet address with the last one (10th account) from Ganache UI. This will be treated as the beneficiary address.
+    "0xd2e13a171E6Ab80d5bdCA739e6A05d6A372E339B", // Replace this wallet address with the last one (10th account) from Ganache UI. This will be treated as the beneficiary address.
     2000000000000000000, // 2 ETH
     500000000000000000000 // 500 ETH
   );

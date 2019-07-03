@@ -77,7 +77,7 @@ nav{
     justify-content: flex-start;
 }
 
-.transaction_item{
+.transaction_item, .pixel{
     width: 150px;
     height: 150px;
     margin: 30px;
