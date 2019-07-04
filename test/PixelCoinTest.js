@@ -33,7 +33,7 @@ contract('PixelCoin', async function (accounts) {
       assert(true === true, 'this is true');
     });
 
-    it("Test-buys the pixel at 300, 300. tests pixel-coin creation.", async () => {
+    it("Should buy the pixel at 300, 300. (Tests the called function createPixel().)", async () => {
       let instance = await PixelCoin.deployed().then(async function(instance) {
             await instance.buyUnownedPixel("city");
             const pixel = await instance.pixel_placement.call();
@@ -42,16 +42,15 @@ contract('PixelCoin', async function (accounts) {
          });
       });
 
-      it("Test-shows bought pixel of the given user", async () => {
+      it("Should show the bought pixel(s) of the given user", async () => {
         let instance = await PixelCoin.deployed().then(async function(instance) {
-              await instance.showPixels();
-              const pixel = await instance.pixel_placement.call();
-              assert.equal(pixel, (0,0), 'Did not work.');
+              const pixels = await instance.showPixels().call();
+              assert.equal(pixels.length, 1, 'Did not work.');
               done();
            });
         });
 
-        it("Test-ensures the length of the lengthOfPictureArray variable is increased after adding a new picture", async () => {
+        it("Should ensure the length of the lengthOfPictureArray variable is increased after adding a new picture", async () => {
           let instance = await PixelCoin.deployed().then(async function(instance) {
                 await instance.addPictureToArrayOfPictures("Nicolas Cage");
                 const picturesArrayLength = await instance.lengthOfPictureArray.call();
@@ -60,7 +59,7 @@ contract('PixelCoin', async function (accounts) {
              });
           });
 
-          it("Test-ensures the same name can't be added twice to the pictures array", async () => {
+          it("Should ensure the same name can't be added twice to the pictures array", async () => {
             let instance = await PixelCoin.deployed().then(async function(instance) {
                   await instance.addPictureToArrayOfPictures("Nicolas Cage");
                   await instance.addPictureToArrayOfPictures("Nicolas Cage");
@@ -70,7 +69,7 @@ contract('PixelCoin', async function (accounts) {
                });
             });
 
-            it("Test-looks at the picture names added to the array", async () => {
+            it("Should look at the picture names added to the array", async () => {
               let instance = await PixelCoin.deployed().then(async function(instance) {
                     await instance.addPictureToArrayOfPictures("city");
                     await instance.addPictureToArrayOfPictures("Nicolas Cage");
@@ -79,11 +78,5 @@ contract('PixelCoin', async function (accounts) {
                     done();
                  });
               });
-
-        function buyUnownedPixel(string memory _picture) public payable {
-        function showPixels() public view returns (Pixel[] memory){
-        function addPictureToArrayOfPictures(string memory _name) public restricted {
-
-
     });
 });
