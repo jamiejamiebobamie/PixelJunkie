@@ -20,7 +20,8 @@ Description:    pixeljunkie will consist of the following action-items:
                 4.  STRETCH-CHALLENGE: user should be able to vote on what the picture should be called. the percentage of pixels the user owns of a given picture determines the weight of the  user's vote.
                 5.  STRETCH-CHALLENGE: users should be able to offer to buy the pixels of another user.
 
-Plan:
+Plan:           My high-level plan will consist of these steps:
+
                 1. I will implement the frontend first, as it's better to build what the user sees
                 before building the functionality.
                 2. Once I've built the frontend of the site, I will work on the smart contract.
