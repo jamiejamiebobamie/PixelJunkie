@@ -4,9 +4,6 @@ window.addEventListener('load', function() {
     var pixelJunkies;
     var userAccount;
 
-    // const FACTORY_CONTRACT_ADDRESS = process.env.FACTORY_CONTRACT_ADDRESS
-
-
       function startApp() {
         var pixelJunkiesAddress = NFT_CONTRACT_ADDRESS;
         pixelJunkies = new web3js.eth.Contract(pixelJunkiesABI, pixelJunkiesAddress);
@@ -51,8 +48,6 @@ window.addEventListener('load', function() {
          return pixelJunkies.methods.pictures(id).call()
      }
 
-// the problem is there is a displayZombies function as well as a getZombiesByOwner method,
-// and I think I combined those two into one function. a little tired. taking a break.
       function getOwnedPixels(msgSender) {
         return pixelJunkies.methods.showPixels(msgSender).call()
      }

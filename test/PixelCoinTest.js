@@ -34,6 +34,7 @@ contract('PixelCoin', async function (accounts) {
       assert(true === true, 'this is true');
     });
 
+// Code to test the owner account copied from: https://github.com/droxey/rainbowcoin/blob/master/test/RainbowCoinTest.js
     it("Should make first account an owner", async () => {
       let instance = await RainbowCoin.deployed();
       let owner = await instance.owner();
