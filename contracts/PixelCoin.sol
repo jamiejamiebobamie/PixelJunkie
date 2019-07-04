@@ -18,30 +18,30 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
           /// @notice This is the contract constructor
           /// @dev The contructor pushes the "city" picture to the picture array
             owner = msg.sender;
-            pictures.push('city')
+            pictures.push('city');
       }
 
       /// @notice This is a borrowed function from the openzepplin.
-      /// @teacher This is meant to the replace the "onlyOwner" modifier from Cryptozombies
+      /// @dev This is meant to the replace the "onlyOwner" modifier from Cryptozombies
       modifier restricted() {
         if (msg.sender == owner) _;
       }
 
       /// @notice This is a borrowed function from the openzepplin.
-      /// @teacher I copied this from your rainbowcoin contract.
+      /// @dev I copied this from your rainbowcoin contract.
       function setCompleted(uint completed) public restricted {
         last_completed_migration = completed;
       }
 
       /// @notice This is a borrowed function from the openzepplin.
-      /// @teacher I copied this from your rainbowcoin contract.
+      /// @dev I copied this from your rainbowcoin contract.
       /// @notice This function was throwing errors on deploy, so I commented it out.
       /* function upgrade(address new_address) public restricted {
         Migrations upgraded = Migrations(new_address);
         upgraded.setCompleted(last_completed_migration);
       } */
 
-    /// @teacher I copied this from Cryptozombies.
+    /// @dev I copied this from Cryptozombies.
     /// @notice This function requires methods that I did not copy...
     /// @notice Commented it out as it was throwing errors on deploy.
     /* function withdraw() external restricted {
@@ -83,8 +83,8 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
     mapping (address => uint[]) ownertoBoughtCountAndBoughtDay;
 
     /// @notice This function creates a new pixel.
-    /// @param _xy, an x-y coordinate, two uint16 array.
-    /// @param _picture, the name of a picture, string.
+    /// @param _xy an x-y coordinate, two uint16 array.
+    /// @param _picture the name of a picture, string.
     function createPixel(uint16[2] memory _xy, string memory _picture) internal {
         uint id = ownerToPixels[msg.sender].push(Pixel(_xy, _picture)).sub(1);
         pictureToPixels[_picture].push(id);
@@ -93,7 +93,7 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
 
     /// @notice This function calls the createPixel fucntion,
     /// @notice Handles the control flow of the user's buy-rate.
-    /// @param _picture, the name of a picture, string.
+    /// @param _picture the name of a picture, string.
     function buyUnownedPixel(string memory _picture) public payable {
         /// @notice Require that the amount of pixels bought today is less than 3
         /// @notice or require that today's date is different than the date stored from the last buy.
@@ -127,7 +127,7 @@ contract PixelCoin is ERC721Full, ERC721Mintable {
     }
 
     /// @notice A function to add new names to the array of picture names
-    /// @param _name, a string to test.
+    /// @param _name a string to test.
     function addPictureToArrayOfPictures(string memory _name) public restricted {
         bool unique = true;
         string memory _test;
