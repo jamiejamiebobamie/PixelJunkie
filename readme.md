@@ -1,12 +1,10 @@
-This is a repository for blockchain school project, utilizing web3.js, metamask, node.js,
-handlebars, bootstrap, and mongodb to allow uses to interact with a Solidity smart contract on the
+This is a repository for a blockchain school project, utilizing web3.js, metamask, node.js,
+handlebars, bootstrap, and mongodb to allow users to interact with a Solidity smart contract on the
 Etherium blockchain!
 
-The site is called "pixeljunkie" and allows users to purchase PixelCoins with Ether, the crytpocurrency of Etherium.
+The site is called "pixeljunkie" and allows users to purchase PixelCoins with Ether, the crytpocurrency of Ethereum.
 
-pixeljunkie is a collectible game without much functionality beyond collecting unique pixels of a give picture.
-
-Future implementations of the site will expand on this base.
+pixeljunkie is a collectible game without much functionality beyond collecting unique pixels of a give picture. Future implementations of the site will expand on this base idea.
 
 Please see my [Proposal](proposal.md) for the intentions of this project.
 
