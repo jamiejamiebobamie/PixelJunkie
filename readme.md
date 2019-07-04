@@ -8,7 +8,7 @@ pixeljunkie is a collectible game without much functionality beyond collecting u
 
 Future implementations of the site will expand on this base.
 
-Please see my [Propsal](propsal.md) for the intentions of this project.
+Please see my [Proposal](proposal.md) for the intentions of this project.
 
 If you would like to contribute to this project, please don't hesitate to reach out to me at
 jamie.mccrory@students.makeschool.com!
