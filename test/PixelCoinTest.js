@@ -1,6 +1,7 @@
-
-const PixelCoin = artifacts.require('./contracts/PixelCoin.sol');
-const _ = '        ';
+const assert = require('assert');
+const ganache = require('ganache-cli');
+const json = require('./../build/contracts/PixelCoin.json');
+const PixelCoin = artifacts.require('./PixelCoin.sol');
 
 contract('PixelCoin', async function (accounts) {
   let token;
@@ -33,7 +34,13 @@ contract('PixelCoin', async function (accounts) {
       assert(true === true, 'this is true');
     });
 
-    it("Should buy the pixel at 300, 300. (Tests the called function createPixel().)", async () => {
+    it("Should make first account an owner", async () => {
+      let instance = await RainbowCoin.deployed();
+      let owner = await instance.owner();
+      assert.equal(owner, accounts[0]);
+    });
+
+    it("Should buy the pixel at 300, 300. (Tests the called function createPixel() as well.)", async () => {
       let instance = await PixelCoin.deployed().then(async function(instance) {
             await instance.buyUnownedPixel("city");
             const pixel = await instance.pixel_placement.call();
