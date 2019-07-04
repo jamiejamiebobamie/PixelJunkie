@@ -1,22 +1,6 @@
-/*
-
-1.  the smart contract should allow users to buy a pixel or pixels
-    of the picture they click on, on the frontend side of things.
-
-1.  users should be able to view the pixels they own.
-
-2.  STRETCH-CHALLENGE the pixels that are owned by someone are shown, while the pixels
-    that remain to be purchased are grey.
-
-3.  STRETCH-CHALLENGE user should be able to vote on what the picture should be called.
-    the percentage of pixels the user owns determines the weight of the user's vote.
-
-*/
-
 
 const PixelCoin = artifacts.require('./contracts/PixelCoin.sol');
 const _ = '        ';
-
 
 contract('PixelCoin', async function (accounts) {
   let token;
@@ -44,18 +28,62 @@ contract('PixelCoin', async function (accounts) {
   });
 
   describe('PixelCoin.sol', function () {
+
     it('Should always pass this canary test', async () => {
       assert(true === true, 'this is true');
     });
 
-    it("Test-buys the pixel at 0,0", async () => {
+    it("Test-buys the pixel at 300, 300. tests pixel-coin creation.", async () => {
       let instance = await PixelCoin.deployed().then(async function(instance) {
-            await instance.buyPixel(0,0);
+            await instance.buyUnownedPixel("city");
             const pixel = await instance.pixel_placement.call();
-            assert.equal(pixel, (0,0), 'Did not work.');
+            assert.equal(pixel.xy, [300,300], 'Did not work.');
             done();
          });
       });
+
+      it("Test-shows bought pixel of the given user", async () => {
+        let instance = await PixelCoin.deployed().then(async function(instance) {
+              await instance.showPixels();
+              const pixel = await instance.pixel_placement.call();
+              assert.equal(pixel, (0,0), 'Did not work.');
+              done();
+           });
+        });
+
+        it("Test-ensures the length of the lengthOfPictureArray variable is increased after adding a new picture", async () => {
+          let instance = await PixelCoin.deployed().then(async function(instance) {
+                await instance.addPictureToArrayOfPictures("Nicolas Cage");
+                const picturesArrayLength = await instance.lengthOfPictureArray.call();
+                assert.equal(picturesArrayLength, 2, 'Did not work.');
+                done();
+             });
+          });
+
+          it("Test-ensures the same name can't be added twice to the pictures array", async () => {
+            let instance = await PixelCoin.deployed().then(async function(instance) {
+                  await instance.addPictureToArrayOfPictures("Nicolas Cage");
+                  await instance.addPictureToArrayOfPictures("Nicolas Cage");
+                  const picturesArrayLength = await instance.lengthOfPictureArray.call();
+                  assert.equal(picturesArrayLength, 2, 'Did not work.');
+                  done();
+               });
+            });
+
+            it("Test-looks at the picture names added to the array", async () => {
+              let instance = await PixelCoin.deployed().then(async function(instance) {
+                    await instance.addPictureToArrayOfPictures("city");
+                    await instance.addPictureToArrayOfPictures("Nicolas Cage");
+                    const pictures = await instance.pictures.call();
+                    assert.equal([pictures[0],pictures[1]], ["city", "Nicolas Cage"], 'Did not work.');
+                    done();
+                 });
+              });
+
+        function buyUnownedPixel(string memory _picture) public payable {
+        function showPixels() public view returns (Pixel[] memory){
+        function addPictureToArrayOfPictures(string memory _name) public restricted {
+
 
     });
 });
