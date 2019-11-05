@@ -18,7 +18,7 @@
     "express-validator": "^6.0.1",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
-    "mongoose": "^5.6.1",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
     "openzeppelin-solidity": "^2.3.0",
     "truffle": "^5.0.25",
